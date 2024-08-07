@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger King Franchise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Burger King Franchise</h1>
+        </header>
+        <main>
+            <button id="orderButton">Order Food</button>
+            <div id="foodItems">
+                <div class="food-item">
+                    <input type="checkbox" id="burger" name="foodItem" value="Burger" />
+                    <label for="burger">Burger</label>
+                </div>
+                <div class="food-item">
+                    <input type="checkbox" id="fries" name="foodItem" value="Fries" />
+                    <label for="fries">Fries</label>
+                </div>
+                <div class="food-item">
+                    <input type="checkbox" id="drink" name="foodItem" value="Drink" />
+                    <label for="drink">Drink</label>
+                </div>
+            </div>
+            <div id="loadingMessage">Preparing your food...</div>
+            <div id="imageContainer"></div>
+            <div id="orderId">Order ID: <span id="orderIdValue"></span></div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
