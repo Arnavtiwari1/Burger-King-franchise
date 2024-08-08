@@ -1,22 +1,22 @@
-function getRandomTime(){
+function getRandomTime() {
     return Math.floor(Math.random() * 5000) + 5000;
 }
 
-function getRandomOrderId(){
+function getRandomOrderId() {
     return Math.floor(Math.random() * 1000) + 100;
 }
 
-document.getElementById('orderButton').addEventListener('click', function(){
-    const selecteditems = [];
+document.getElementById('orderButton').addEventListener('click', function() {
+    const selectedItems = [];
     const checkBoxes = document.getElementsByName('foodItem');
 
-    checkBoxes.forEach(function(checkbox){
-        if(checkbox.checked){
-            selecteditems.push(checkbox.value);
+    checkBoxes.forEach(function(checkbox) {
+        if (checkbox.checked) {
+            selectedItems.push(checkbox.value);
         }
     });
 
-    if(selecteditems.length === 0){
+    if (selectedItems.length === 0) {
         alert("Please select at least one item");
         return;
     }
@@ -28,24 +28,37 @@ document.getElementById('orderButton').addEventListener('click', function(){
     const imageContainer = document.getElementById('imageContainer');
     const orderIdElement = document.getElementById('orderId');
     const orderIdValueElement = document.getElementById('orderIdValue');
+    const timerElement = document.getElementById('timer');
 
     orderIdElement.style.display = 'none';
     imageContainer.innerHTML = '';
     loadingMessage.style.display = 'block';
 
-    const promise = new Promise(function(resolve, reject){
-        setTimeout(function(){
+    const timeLeft = getRandomTime();
+    let timeRemaining = timeLeft / 1000;
+
+    const interval = setInterval(() => {
+        timerElement.textContent = `${timeRemaining.toFixed(2)} seconds`;
+        timeRemaining -= 0.1;
+
+        if (timeRemaining < 0) {
+            clearInterval(interval);
+        }
+    }, 100);
+
+    const promise = new Promise(function(resolve) {
+        setTimeout(function() {
             resolve();
-        }, getRandomTime());
+        }, timeLeft);
     });
 
-    promise.then(function(){
+    promise.then(function() {
         const orderId = getRandomOrderId();
         orderIdValueElement.textContent = orderId;
         orderIdElement.style.display = 'block';
         loadingMessage.style.display = 'none';
 
-        selecteditems.forEach(item => {
+        selectedItems.forEach(item => {
             const foodImage = document.createElement('img');
             foodImage.src = getImageUrl(item);
             foodImage.alt = item;
@@ -58,7 +71,7 @@ document.getElementById('orderButton').addEventListener('click', function(){
 });
 
 function getImageUrl(foodItem) {
-    switch(foodItem) {
+    switch (foodItem) {
         case 'Burger':
             return 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVyZ2VyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60';
         case 'Fries':

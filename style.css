@@ -82,6 +82,11 @@ main {
     display: none;
 }
 
+#timer {
+    font-size: 18px;
+    color: #ff6600;
+}
+
 #imageContainer {
     width: 100%;
     max-width: 300px;
